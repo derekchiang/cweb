@@ -5,16 +5,20 @@ default: lib
 
 lib:
 	mkdir -p build
-	$(CC) -fblocks -c -fPIC src/cweb_router.c -o build/cweb.o -I./include \
-	    -I./3rdparty/apr/include \
-	    -I./3rdparty/r3/include \
-	    -I./3rdparty/libmicrohttpd/src/include
-	$(CC) -shared -Wl,-soname,libcweb.so -o build/libcweb.so build/cweb.o
+	cd build && \
+	    $(CC) -fblocks -c -fPIC \
+	    ../src/cweb_common.c ../src/cweb_router.c \
+	    -I../include \
+	    -I../3rdparty/apr/include \
+	    -I../3rdparty/r3/include \
+	    -I../3rdparty/libmicrohttpd/src/include
+	$(CC) -shared -Wl,-soname,libcweb.so -o build/libcweb.so \
+	    build/cweb_common.o build/cweb_router.o
 
 main: lib
 	mkdir -p build
-	$(CC) -std=c11 -fblocks main.c -o build/main -I ./include -L./build -lcweb \
-	    -L./3rdparty/apr/.libs -lapr-1 \
+	$(CC) -std=c11 -fblocks main.c -o build/main -I./include -L./build -lcweb \
+	    -I./3rdparty/apr/include -L./3rdparty/apr/.libs -lapr-1 \
 	    -L./3rdparty/r3/.libs -lr3 \
 	    -L./3rdparty/libmicrohttpd/src/microhttpd/.libs -lmicrohttpd \
 	    -lBlocksRuntime

@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include "cweb_common.h"
 #include "cweb_router.h"
 
 #define debug(str, args...) fprintf(stderr, str "\n", ## args)
 #define print(str, args...) fprintf(stdout, str "\n", ## args)
 
 int main(void) {
+    /*cweb_initialze();*/
     cweb_router_t *router = cweb_router_new();
 
     __block int sum = 0;
@@ -22,6 +24,7 @@ int main(void) {
     printf("sum is: %d\n", sum);  // should be 600
 
     cweb_router_destroy(router);
+    cweb_finalize();
     return 0;
 }
 

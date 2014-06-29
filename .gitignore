@@ -30,3 +30,6 @@ session.vim
 .tags
 
 build/
+
+3rdparty/
+
