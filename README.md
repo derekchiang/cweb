@@ -6,15 +6,22 @@ This is very much a work in progress.  Currently I have only built a router.  He
 
 ```c
 #include <stdio.h>
+#include "cweb_common.h"
 #include "cweb_router.h"
 
 int main(void) {
+    cweb_initialize();
     cweb_router_t *router = cweb_router_new();
 
     __block int sum = 0;
     cweb_router_add_route(router, "/hello", ^(void *data) {
         // normally you shouldn't be casting between int and void *... this is just an example
         sum += (int) data;  
+    });
+    
+    // Multiple handlers for the same route is OK
+    cweb_router_add_route(router, "/hello", ^(void *data) {
+        puts("haha");
     });
 
     cweb_router_compile(router);
@@ -26,6 +33,7 @@ int main(void) {
     printf("sum is: %d\n", sum);  // should be 600
 
     cweb_router_destroy(router);
+    cweb_finalize();
     return 0;
 }
 ```

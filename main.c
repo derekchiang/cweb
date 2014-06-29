@@ -6,13 +6,18 @@
 #define print(str, args...) fprintf(stdout, str "\n", ## args)
 
 int main(void) {
-    /*cweb_initialze();*/
+    cweb_initialize();
     cweb_router_t *router = cweb_router_new();
 
     __block int sum = 0;
     cweb_router_add_route(router, "/hello", ^(void *data) {
         // normally you shouldn't be casting between int and void *... this is just an example
         sum += (int) data;  
+    });
+    
+    // Multiple handlers for the same route is OK
+    cweb_router_add_route(router, "/hello", ^(void *data) {
+        puts("haha");
     });
 
     cweb_router_compile(router);
