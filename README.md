@@ -26,6 +26,7 @@ int main(void) {
         printf("sum is: %d\n", sum);
     });
 
+    // Of course, we can capture dynamic variables
     cweb_router_add_route(router, "/hello/{name}", ^(const char **vars, int vars_len, void *data) {
         assert(vars_len > 0);
         const char *name = vars[0];
