@@ -6,6 +6,8 @@ This is very much a work in progress.  Currently I have only built a router.  He
 
 ```c
 #include <stdio.h>
+#include <assert.h>
+
 #include "cweb_common.h"
 #include "cweb_router.h"
 
@@ -14,23 +16,29 @@ int main(void) {
     cweb_router_t *router = cweb_router_new();
 
     __block int sum = 0;
-    cweb_router_add_route(router, "/hello", ^(void *data) {
+    cweb_router_add_route(router, "/sum", ^(const char **vars, int vars_len, void *data) {
         // normally you shouldn't be casting between int and void *... this is just an example
         sum += (int) data;  
     });
     
-    // Multiple handlers for the same route is OK
-    cweb_router_add_route(router, "/hello", ^(void *data) {
-        puts("haha");
+    // Multiple handlers for the same route is OK.  Handles are called in the order they were added
+    cweb_router_add_route(router, "/sum", ^(const char **vars, int vars_len, void *data) {
+        printf("sum is: %d\n", sum);
+    });
+
+    cweb_router_add_route(router, "/hello/{name}", ^(const char **vars, int vars_len, void *data) {
+        assert(vars_len > 0);
+        const char *name = vars[0];
+        printf("Hello, %s\n", name);
     });
 
     cweb_router_compile(router);
 
-    cweb_router_dispatch(router, "/hello", 100);
-    cweb_router_dispatch(router, "/hello", 200);
-    cweb_router_dispatch(router, "/hello", 300);
+    cweb_router_dispatch(router, "/sum", 100);
+    cweb_router_dispatch(router, "/sum", 200);
+    cweb_router_dispatch(router, "/sum", 300);
 
-    printf("sum is: %d\n", sum);  // should be 600
+    cweb_router_dispatch(router, "/hello/derek", NULL);
 
     cweb_router_destroy(router);
     cweb_finalize();
