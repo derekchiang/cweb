@@ -56,12 +56,13 @@ extern void cweb_router_compile(cweb_router_t *self) {
 }
 
 extern bool cweb_router_dispatch(cweb_router_t *self, const char *route, void *data) {
-    node *matched_node = r3_tree_match(self->tree, route, NULL);
+    match_entry *entry = match_entry_create(route);
+    node *matched_node = r3_tree_match_entry(self->tree, entry);
     if (matched_node) {
         apr_array_header_t *handlers = matched_node->data;
         for (nat i = 0; i < handlers->nelts; i++) {
             data_handler_b handler = APR_ARRAY_IDX(handlers, i, data_handler_b);
-            handler(data);
+            handler(entry->vars->tokens, entry->vars->len, data);
         }
         return true;
     }

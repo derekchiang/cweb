@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 // Data handler
-typedef void (^data_handler_b)(void *);
+typedef void (^data_handler_b)(const char **vars, int vars_len, void *data);
 
 // Router
 typedef struct cweb_router cweb_router_t;
