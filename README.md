@@ -61,5 +61,5 @@ On Ubuntu, the blocks extension can be installed via `sudo apt-get install libbl
 
 ## API
 
-TODO.  For now, please refer to `include/cweb.h` and `main.c`.
+TODO.  For now, please refer to `include/` and `main.c`.
 
