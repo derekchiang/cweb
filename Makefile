@@ -15,17 +15,14 @@ lib:
 	$(CC) -shared -Wl,-soname,libcweb.so -o build/libcweb.so \
 	    build/cweb_common.o build/cweb_router.o
 
-main: lib
+examples: lib
 	mkdir -p build
-	$(CC) -std=c11 -fblocks main.c -o build/main -I./include -L./build -lcweb \
+	$(foreach program,routing,\
+	$(CC) -std=c11 -fblocks examples/$(program).c -o build/$(program) -I./include -L./build -lcweb \
 	    -I./3rdparty/apr/include -L./3rdparty/apr/.libs -lapr-1 \
 	    -L./3rdparty/r3/.libs -lr3 \
 	    -L./3rdparty/libmicrohttpd/src/microhttpd/.libs -lmicrohttpd \
-	    -lBlocksRuntime
-
-run: main
-	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./build ./build/main
-
+	    -lBlocksRuntime)
 
 install: lib
 	cp -R include/* /usr/local/include
@@ -42,5 +39,5 @@ install: lib
 clean:
 	rm -rf build
 
-.PHONY: default main run lib install clean 3rdparty
+.PHONY: default main lib examples install clean 3rdparty
 

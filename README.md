@@ -62,13 +62,13 @@ On Ubuntu, the blocks extension can be installed via `sudo apt-get install libbl
 
 `make 3rdparty` will build and install all third-party libraries that `cweb` depends on.
 
-`make` will build `cweb` in the `build` folder.
+`make` will build `cweb` in the `build/` folder.
 
 `make install` will install `cweb` in your system.
 
-`make run` will build and run `main.c`, which is an example using `cweb`.
+`make examples` will build the examples under `examples/` to `build/`.  You can then manually run the examples.
 
 ## API
 
-TODO.  For now, please refer to `include/` and `main.c`.
+TODO.  For now, please refer to `include/` and `examples/`.
 
