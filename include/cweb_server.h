@@ -1,11 +1,12 @@
 #pragma once
 
-#include "cweb_common.h"
+#include "cweb.h"
 
 #pragma mark =============== SERVER CONFIG ===============
 
 typedef struct cweb_server_config {
     unsigned int port;
+    cweb_router_t *router;
 } cweb_server_config_t;
 
 #pragma mark =============== SERVER ===============

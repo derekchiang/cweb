@@ -8,8 +8,7 @@ This is very much a work in progress.  Currently I have only built a router.  He
 #include <stdio.h>
 #include <assert.h>
 
-#include "cweb_common.h"
-#include "cweb_router.h"
+#include "cweb.h"
 
 int main(void) {
     cweb_initialize();
@@ -25,7 +24,7 @@ int main(void) {
     cweb_router_add_route(router, "/sum", ^(const char **vars, int vars_len, void *data) {
         printf("sum is: %d\n", sum);
     });
-
+    
     // Of course, we can capture dynamic variables
     cweb_router_add_route(router, "/hello/{name}", ^(const char **vars, int vars_len, void *data) {
         assert(vars_len > 0);

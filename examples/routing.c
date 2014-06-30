@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "cweb_common.h"
-#include "cweb_router.h"
+#include "cweb.h"
 
 int main(void) {
     cweb_initialize();
