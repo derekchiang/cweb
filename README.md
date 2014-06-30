@@ -31,6 +31,14 @@ To build the examples:
 
 The examples will be put under `build/`.
 
+## Benchmark
+
+You can benchmark the server with `ab`, the Apache HTTP server benchmarking tool.  Make sure a server (`examples/server.c` will do) is running on port 8000, then:
+
+    ab -n 10000 -c 1000 http://127.0.0.1:8000/
+
+On my laptop, it's able to handle roughly 37K requests per second. 
+
 ## API
 
 TODO.  For now, please refer to `include/` and `examples/`.
