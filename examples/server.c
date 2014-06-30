@@ -21,6 +21,7 @@ int main(void) {
     };
 
     cweb_server_t *server = cweb_server_run(config);
+    puts("server is running at: http://localhost:8000");
     (void) getc(stdin);
 
     cweb_server_stop(server);
