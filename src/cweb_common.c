@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <cweb_common.h>
+#include "cweb_common.h"
+#include "cweb_private.h"
 
 bool cweb_initialized = false;
 apr_pool_t *cweb_global_pool = NULL;

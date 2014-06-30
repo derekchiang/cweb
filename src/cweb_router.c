@@ -8,7 +8,7 @@
 
 #include <r3/r3.h>
 
-#include "cweb_common.h"
+#include "cweb_private.h"
 #include "cweb_router.h"
 
 struct cweb_router {

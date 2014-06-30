@@ -4,9 +4,6 @@
 #include "cweb_common.h"
 #include "cweb_router.h"
 
-#define debug(str, args...) fprintf(stderr, str "\n", ## args)
-#define print(str, args...) fprintf(stdout, str "\n", ## args)
-
 int main(void) {
     cweb_initialize();
     cweb_router_t *router = cweb_router_new();

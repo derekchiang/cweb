@@ -1,21 +1,10 @@
 #pragma once
 
-#include <limits.h>
-#include <linux/limits.h>
-#include <stdbool.h>
-
-#include <apr_pools.h>
-
-typedef unsigned long long nat;
-
-#pragma mark =============== GLOBAL DATA STRUCTURES =============== 
-
-// Track if cweb_initialize() has been called
-extern bool cweb_initialized;
-
-// The root memory pool.  All other memory pools should be the subpools of this one.
-extern apr_pool_t *cweb_global_pool;
-
+// cweb_initialize should be called at the beginning of a cweb application, before any other APIs
+// are used.  It's OK to call this function multiple times.
 extern void cweb_initialize(void);
+
+// cweb_finalize should be called at the  end of a cweb application, after which no APIs should
+// be used without calling cweb_initialize() again.
 extern void cweb_finalize(void);
 
