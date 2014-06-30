@@ -19,8 +19,7 @@ struct cweb_router {
 cweb_router_t *cweb_router_new(void) {
     if (!cweb_initialized) cweb_initialize();
 
-    apr_pool_t *pool;
-    apr_pool_create(&pool, cweb_global_pool);
+    apr_pool_t *pool = create_subpool();
 
     cweb_router_t *self = apr_palloc(pool, sizeof(cweb_router_t));   
     self->tree = r3_tree_create(10);

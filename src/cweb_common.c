@@ -7,15 +7,6 @@
 bool cweb_initialized = false;
 apr_pool_t *cweb_global_pool = NULL;
 
-static inline void check_apr_status(apr_status_t status) {
-    if (status != APR_SUCCESS) {
-        char buf[256];
-        apr_strerror(status, buf, sizeof(buf));
-        puts(buf);
-        exit(EXIT_FAILURE);
-    }
-}
-
 void cweb_initialize(void) {
     if (cweb_initialized) return;
     apr_initialize();

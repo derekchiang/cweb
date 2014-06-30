@@ -13,7 +13,9 @@ typedef struct cweb_server_config {
 
 typedef struct cweb_server cweb_server_t;
 
-extern cweb_server_t cweb_server_new(cweb_server_config_t config);
+extern cweb_server_t *cweb_server_new(cweb_server_config_t config);
 
-extern void cweb_server_run(cweb_server_t);
+extern void cweb_server_destroy(cweb_server_t *);
+
+extern void cweb_server_run(cweb_server_t *);
 
