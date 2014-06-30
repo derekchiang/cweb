@@ -9,19 +9,27 @@ This is very much a work in progress.  [Here is a sneak peak](examples/server.c)
 1. [Apache Portable Runtime](https://apr.apache.org/)
 2. [r3](https://github.com/c9s/r3)
 3. [libmicrohttpd](http://www.gnu.org/software/libmicrohttpd/)
-4. clang with [blocks extension](http://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29)
+4. [clang](http://clang.llvm.org/) with [blocks extension](http://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29)
 
-On Ubuntu, the blocks extension can be installed via `sudo apt-get install libblocksruntime-dev`
+On Ubuntu, clang and the blocks extension can be installed with:
+
+    sudo apt-get install clang libblocksruntime-dev
+
+The other dependencies come with this repo and therefore do not need to be installed manually.  See the build instructions below. 
 
 ## Build
 
-`make 3rdparty` will build and install all third-party libraries that `cweb` depends on.
+On Ubuntu:
 
-`make` will build `cweb` in the `build/` folder.
+    make 3rdparty # optional... only if you don't have the dependencies installed already
+    make
+    sudo make install
 
-`make install` will install `cweb` in your system.
+To build the examples:
 
-`make examples` will build the examples under `examples/` to `build/`.  You can then manually run the examples.
+    make examples
+
+The examples will be put under `build/`.
 
 ## API
 
