@@ -2,8 +2,10 @@
 
 #include <stdbool.h>
 
+#include "cweb_http.h"
+
 // Data handler
-typedef void (^data_handler_b)(const char **vars, int vars_len, void *data);
+typedef void (^req_handler_b)(cweb_request_t *req, cweb_response_t *res);
 
 // Router
 typedef struct cweb_router cweb_router_t;
@@ -17,7 +19,7 @@ extern void cweb_router_destroy(cweb_router_t *);
 // Register a new route with a handler.
 // It's OK to register multiple handlers with the same route.  In this case, the handlers will be called
 // in the order they were registered.
-extern void cweb_router_add_route(cweb_router_t *, const char *, data_handler_b);
+extern void cweb_router_add_route(cweb_router_t *, const char *, req_handler_b);
 
 // Compile the routes for faster matching.  This function does not necessarily need to be
 // manually called; the library will make sure to call it once before start using the router.
@@ -25,5 +27,6 @@ extern void cweb_router_add_route(cweb_router_t *, const char *, data_handler_b)
 extern void cweb_router_compile(cweb_router_t *);
 
 // Dispatch a route with the given router.  The corresponding handler, if any, will then be called.
-extern bool cweb_router_dispatch(cweb_router_t *, const char *route, void *data);
+extern bool cweb_router_dispatch(cweb_router_t *, const char *route,
+                                 cweb_request_t *, cweb_response_t *res);
 

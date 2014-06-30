@@ -18,7 +18,7 @@ extern apr_pool_t *cweb_global_pool;
 
 typedef unsigned long long nat;
 
-#define debug(str, args...) fprintf(stderr, str "\n", ## args)
+#define eprint(str, args...) fprintf(stderr, str "\n", ## args)
 #define print(str, args...) fprintf(stdout, str "\n", ## args)
 
 static inline void check_apr_status(apr_status_t status) {
@@ -30,9 +30,9 @@ static inline void check_apr_status(apr_status_t status) {
     }
 }
 
-static inline apr_pool_t *create_subpool(void) {
+static inline apr_pool_t *create_subpool(apr_pool_t *parent) {
     apr_pool_t *pool;
-    apr_status_t status = apr_pool_create(&pool, cweb_global_pool);
+    apr_status_t status = apr_pool_create(&pool, parent);
     check_apr_status(status);
     return pool;
 }

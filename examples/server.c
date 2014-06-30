@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
 #include "cweb.h"
@@ -7,10 +8,11 @@ int main(void) {
     cweb_initialize();
     cweb_router_t *router = cweb_router_new();
 
-    cweb_router_add_route(router, "/hello/{name}", ^(const char **vars, int vars_len, void *data) {
-        assert(vars_len > 0);
-        const char *name = vars[0];
-        printf("Hello, %s\n", name);
+    cweb_router_add_route(router, "/hello/{name}", ^(cweb_request_t *req, cweb_response_t *res) {
+        char *buf = malloc(256);
+        res->body_len = sprintf(buf, "Hello, %s", cweb_request_param(req, "name"));
+        res->body = buf;
+        res->mem_strat = CWEB_MEM_FREE;
     });
 
     cweb_router_compile(router);

@@ -8,6 +8,7 @@
 
 #include <r3/r3.h>
 
+#include "cweb_common.h"
 #include "cweb_private.h"
 #include "cweb_router.h"
 
@@ -19,7 +20,7 @@ struct cweb_router {
 cweb_router_t *cweb_router_new(void) {
     if (!cweb_initialized) cweb_initialize();
 
-    apr_pool_t *pool = create_subpool();
+    apr_pool_t *pool = create_subpool(cweb_global_pool);
 
     cweb_router_t *self = apr_palloc(pool, sizeof(cweb_router_t));   
     self->tree = r3_tree_create(10);
@@ -32,15 +33,15 @@ void cweb_router_destroy(cweb_router_t *self) {
     apr_pool_destroy(self->pool);
 }
 
-void cweb_router_add_route(cweb_router_t *self, const char *route, data_handler_b handler){
+void cweb_router_add_route(cweb_router_t *self, const char *route, req_handler_b handler){
     node *matched_node = r3_tree_match(self->tree, route, NULL);
     apr_array_header_t *handlers;
     if (matched_node) {
         handlers = (apr_array_header_t *) matched_node->data;
     } else {
-        handlers = apr_array_make(self->pool, 1, sizeof(data_handler_b));
+        handlers = apr_array_make(self->pool, 1, sizeof(req_handler_b));
     }
-    APR_ARRAY_PUSH(handlers, data_handler_b) = Block_copy(handler);
+    APR_ARRAY_PUSH(handlers, req_handler_b) = Block_copy(handler);
     r3_tree_insert_path(self->tree, route, handlers);
 }
 
@@ -54,14 +55,15 @@ extern void cweb_router_compile(cweb_router_t *self) {
     }
 }
 
-extern bool cweb_router_dispatch(cweb_router_t *self, const char *route, void *data) {
+extern bool cweb_router_dispatch(cweb_router_t *self, const char *route,
+                                 cweb_request_t *req, cweb_response_t *res) {
     match_entry *entry = match_entry_create(route);
     node *matched_node = r3_tree_match_entry(self->tree, entry);
     if (matched_node) {
         apr_array_header_t *handlers = matched_node->data;
         for (nat i = 0; i < handlers->nelts; i++) {
-            data_handler_b handler = APR_ARRAY_IDX(handlers, i, data_handler_b);
-            handler(entry->vars->tokens, entry->vars->len, data);
+            req_handler_b handler = APR_ARRAY_IDX(handlers, i, req_handler_b);
+            handler(req, res);
         }
         return true;
     }

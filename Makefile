@@ -17,11 +17,11 @@ lib:
 
 examples: lib
 	mkdir -p build
-	$(foreach program,routing server,\
+	$(foreach program,server,\
 	$(CC) -std=c11 -fblocks examples/$(program).c -o build/$(program) -I./include -L./build -lcweb \
-	    -I./3rdparty/apr/include -L./3rdparty/apr/.libs -lapr-1 \
-	    -L./3rdparty/r3/.libs -lr3 \
-	    -L./3rdparty/libmicrohttpd/src/microhttpd/.libs -lmicrohttpd \
+	    `pkg-config --cflags --libs apr-1` \
+	    `pkg-config --cflags --libs r3` \
+	    `pkg-config --cflags --libs libmicrohttpd` \
 	    -lBlocksRuntime &&) echo "finished building examples"
 
 install: lib
