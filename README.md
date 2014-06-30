@@ -4,15 +4,12 @@
 
 This is very much a work in progress.  [Here is a sneak peak](examples/server.c).
 
-
-`cweb` makes heavy use of the [blocks extension](http://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29#Relation_to_GCC_nested_functions).  What this means is that you will need to use [clang](http://clang.llvm.org/) to compile any project that uses `cweb`.
-
 ## Dependencies
 
 1. [Apache Portable Runtime](https://apr.apache.org/)
 2. [r3](https://github.com/c9s/r3)
 3. [libmicrohttpd](http://www.gnu.org/software/libmicrohttpd/)
-4. clang with blocks extension
+4. clang with [blocks extension](http://en.wikipedia.org/wiki/Blocks_%28C_language_extension)
 
 On Ubuntu, the blocks extension can be installed via `sudo apt-get install libblocksruntime-dev`
 
