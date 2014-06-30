@@ -10,7 +10,8 @@ int main(void) {
 
     cweb_router_add_route(router, "/hello/{name}", ^(cweb_request_t *req, cweb_response_t *res) {
         char *buf = malloc(256);
-        res->body_len = sprintf(buf, "Hello, %s", cweb_request_param(req, "name"));
+        res->body_len = sprintf(buf, "Hello, %s.  You are %s years old.",
+                                req->params[0], cweb_request_query_string(req, "age"));
         res->body = buf;
         res->mem_strat = CWEB_MEM_FREE;
     });
@@ -24,6 +25,7 @@ int main(void) {
 
     cweb_server_t *server = cweb_server_run(config);
     puts("server is running at: http://localhost:8000");
+    puts("try visit: http://localhost:8000/hello/derek?age=20");
     (void) getc(stdin);
 
     cweb_server_stop(server);

@@ -15,10 +15,12 @@ static int root_handler(void *user_data, struct MHD_Connection *connection,
                         const char *upload_data, size_t *upload_data_size, void **ptr) {
     cweb_server_t *server = user_data;
     cweb_router_t *router = server->config.router;
-    apr_pool_t *pool = create_subpool(server->pool);
     
-    cweb_request_t req = {url, method, version, upload_data, upload_data_size};
-    req._params = apr_table_make(pool, 0);
+    cweb_request_t req = {
+        .url = url, .method = method, .version = version,
+        .upload_data = upload_data, .upload_data_size = upload_data_size,
+        .params = NULL, ._connection = connection
+    };
     cweb_response_t res = {};
     res.mem_strat = CWEB_MEM_COPY;
     cweb_router_dispatch(router, url, &req, &res);
@@ -34,7 +36,6 @@ static int root_handler(void *user_data, struct MHD_Connection *connection,
     }
     MHD_queue_response(connection, res.status,
                        MHD_create_response_from_buffer(res.body_len, (void *) res.body, mode));
-    apr_pool_destroy(pool);
     return MHD_YES;
 }
 

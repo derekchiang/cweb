@@ -1,6 +1,6 @@
 #pragma once
 
-#include <apr_tables.h>
+#include <microhttpd.h>
 
 #pragma mark =============== REQUEST ===============
 
@@ -10,11 +10,14 @@ typedef struct cweb_request {
     const char *version;
     const char *upload_data;
     size_t *upload_data_size;
-    apr_table_t *_params; // private; use cweb_request_param to read it
+
+    // private; do not touch
+    const char **params;
+    struct MHD_Connection *_connection;
 } cweb_request_t;
 
-static inline const char *cweb_request_param(cweb_request_t *self, const char *name) {
-    return apr_table_get(self->_params, name);
+static inline const char *cweb_request_query_string(cweb_request_t *self, const char *name) {
+    return MHD_lookup_connection_value(self->_connection, MHD_GET_ARGUMENT_KIND, name);
 }
 
 #pragma mark =============== RESPONSE ===============

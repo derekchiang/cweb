@@ -60,6 +60,7 @@ extern bool cweb_router_dispatch(cweb_router_t *self, const char *route,
     match_entry *entry = match_entry_create(route);
     node *matched_node = r3_tree_match_entry(self->tree, entry);
     if (matched_node) {
+        req->params = entry->vars->tokens;
         apr_array_header_t *handlers = matched_node->data;
         for (nat i = 0; i < handlers->nelts; i++) {
             req_handler_b handler = APR_ARRAY_IDX(handlers, i, req_handler_b);
