@@ -14,6 +14,7 @@
 
 struct cweb_router {
     node *tree;
+    req_handler_b not_found_handler;
     apr_pool_t *pool;
 };
 
@@ -24,13 +25,20 @@ cweb_router_t *cweb_router_new(void) {
 
     cweb_router_t *self = apr_palloc(pool, sizeof(cweb_router_t));   
     self->tree = r3_tree_create(10);
+    self->not_found_handler = NULL;
     self->pool = pool;
     return self;
 }
 
+void cweb_router_set_not_found_handler(cweb_router_t *self, req_handler_b handler) {
+    self->not_found_handler = Block_copy(handler);
+}
+
 void cweb_router_destroy(cweb_router_t *self) {
     r3_tree_free(self->tree);
+    if (self->not_found_handler) Block_release(self->not_found_handler);
     apr_pool_destroy(self->pool);
+    // TODO: you need to Block_release all the handlers as well
 }
 
 void cweb_router_add_route(cweb_router_t *self, const char *route, req_handler_b handler){
@@ -67,7 +75,11 @@ extern bool cweb_router_dispatch(cweb_router_t *self, const char *route,
             handler(req, res);
         }
         return true;
+    } else if (self->not_found_handler) {
+        self->not_found_handler(req, res);
+        return true;
+    } else {
+        return false;
     }
-    return false;
 }
 

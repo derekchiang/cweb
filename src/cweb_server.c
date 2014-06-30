@@ -10,6 +10,8 @@ struct cweb_server {
     struct MHD_Daemon *daemon;
 };
 
+static const char *DEFAULT_NOT_FOUND_PAGE = "Sorry, the page you requested has not been found.";
+
 static int root_handler(void *user_data, struct MHD_Connection *connection,
                         const char *url, const char *method, const char *version,
                         const char *upload_data, size_t *upload_data_size, void **ptr) {
@@ -22,26 +24,32 @@ static int root_handler(void *user_data, struct MHD_Connection *connection,
         .params = NULL, ._connection = connection
     };
     cweb_response_t res = {};
+    res.status = MHD_HTTP_OK;
     res.mem_strat = CWEB_MEM_COPY;
-    cweb_router_dispatch(router, url, &req, &res);
-
-    enum MHD_ResponseMemoryMode mode;
-    switch (res.mem_strat) {
-    case CWEB_MEM_COPY:
-        mode = MHD_RESPMEM_MUST_COPY; break;
-    case CWEB_MEM_FREE:
-        mode = MHD_RESPMEM_MUST_FREE; break;
-    case CWEB_MEM_PERSISTENT:
-        mode = MHD_RESPMEM_PERSISTENT; break;
+    
+    if (cweb_router_dispatch(router, url, &req, &res)) {
+        enum MHD_ResponseMemoryMode mode;
+        switch (res.mem_strat) {
+        case CWEB_MEM_COPY:
+            mode = MHD_RESPMEM_MUST_COPY; break;
+        case CWEB_MEM_FREE:
+            mode = MHD_RESPMEM_MUST_FREE; break;
+        case CWEB_MEM_PERSISTENT:
+            mode = MHD_RESPMEM_PERSISTENT; break;
+        }
+        MHD_queue_response(connection, res.status,
+                           MHD_create_response_from_buffer(res.body_len, (void *) res.body, mode));
+    } else {
+        MHD_queue_response(connection, MHD_HTTP_NOT_FOUND,
+                           MHD_create_response_from_buffer(strlen(DEFAULT_NOT_FOUND_PAGE),
+                                                           (void *) DEFAULT_NOT_FOUND_PAGE,
+                                                           MHD_RESPMEM_PERSISTENT));
     }
-    MHD_queue_response(connection, res.status,
-                       MHD_create_response_from_buffer(res.body_len, (void *) res.body, mode));
     return MHD_YES;
 }
 
 cweb_server_t *cweb_server_run(cweb_server_config_t config) {
     apr_pool_t *pool = create_subpool(cweb_global_pool);
-    
     cweb_server_t *self = apr_palloc(pool, sizeof(cweb_server_t));
     self->config = config;
     self->pool = pool;

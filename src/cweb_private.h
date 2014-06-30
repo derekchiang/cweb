@@ -18,8 +18,8 @@ extern apr_pool_t *cweb_global_pool;
 
 typedef unsigned long long nat;
 
-#define eprint(str, args...) fprintf(stderr, str "\n", ## args)
-#define print(str, args...) fprintf(stdout, str "\n", ## args)
+#define logerr(str, args...) fprintf(stderr, str "\n", ## args)
+#define log(str, args...) fprintf(stdout, str "\n", ## args)
 
 static inline void check_apr_status(apr_status_t status) {
     if (status != APR_SUCCESS) {
