@@ -22,6 +22,7 @@ examples: lib
 	    `pkg-config --cflags --libs apr-1` \
 	    `pkg-config --cflags --libs r3` \
 	    `pkg-config --cflags --libs libmicrohttpd` \
+	    `pkg-config --cflags --libs jansson` \
 	    -lBlocksRuntime &&) echo "finished building examples"
 
 install: lib
