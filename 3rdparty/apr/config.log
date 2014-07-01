@@ -568,7 +568,7 @@ configure:19015: $? = 0
 configure:19032: result: none required
 configure:19040: checking for library containing crypt
 configure:19071: gcc -o conftest -g -O2 -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c  >&5
-/tmp/ccecSC0Q.o: In function `main':
+/tmp/ccoHWepw.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:38: undefined reference to `crypt'
 collect2: error: ld returned 1 exit status
 configure:19071: $? = 1
@@ -678,7 +678,7 @@ configure:19207: checking for pthread.h
 configure:19207: result: yes
 configure:19255: checking for CFLAGS needed for pthreads
 configure:19287: gcc -o conftest -g -O2 -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lcrypt  >&5
-/tmp/ccCWPJjb.o: In function `main':
+/tmp/ccWGODFL.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:41: undefined reference to `pthread_mutexattr_init'
 /home/derek/code/cweb/3rdparty/apr/conftest.c:42: undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
@@ -1174,7 +1174,7 @@ configure:20307: $? = 0
 configure:20307: result: yes
 configure:20307: checking for kqueue
 configure:20307: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lcrypt  -lpthread >&5
-/tmp/ccCtt2cf.o: In function `main':
+/tmp/ccDQmzXx.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:75: undefined reference to `kqueue'
 collect2: error: ld returned 1 exit status
 configure:20307: $? = 1
@@ -1260,7 +1260,7 @@ configure: failed program was:
 configure:20307: result: no
 configure:20307: checking for port_create
 configure:20307: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lcrypt  -lpthread >&5
-/tmp/ccBJ7Ltg.o: In function `main':
+/tmp/ccHz57ED.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:75: undefined reference to `port_create'
 collect2: error: ld returned 1 exit status
 configure:20307: $? = 1
@@ -1480,7 +1480,7 @@ configure:20818: $? = 0
 configure:20818: result: yes
 configure:20832: checking for library containing shm_open
 configure:20863: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lcrypt  -lpthread >&5
-/tmp/cccr5fLP.o: In function `main':
+/tmp/ccGUQXk3.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:66: undefined reference to `shm_open'
 collect2: error: ld returned 1 exit status
 configure:20863: $? = 1
@@ -2321,7 +2321,7 @@ configure:20914: $? = 0
 configure:20914: result: yes
 configure:20914: checking for create_area
 configure:20914: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccjplIVd.o: In function `main':
+/tmp/cclhnSii.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:102: undefined reference to `create_area'
 collect2: error: ld returned 1 exit status
 configure:20914: $? = 1
@@ -2757,7 +2757,7 @@ configure:21968: $? = 0
 configure:21968: result: yes
 configure:21968: checking for send_file
 configure:21968: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccxHb7HL.o: In function `main':
+/tmp/ccSfpnIA.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:124: undefined reference to `send_file'
 collect2: error: ld returned 1 exit status
 configure:21968: $? = 1
@@ -2892,7 +2892,7 @@ configure: failed program was:
 configure:21968: result: no
 configure:21968: checking for sendfilev
 configure:21968: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccw19MaR.o: In function `main':
+/tmp/ccBAFdYD.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:124: undefined reference to `sendfilev'
 collect2: error: ld returned 1 exit status
 configure:21968: $? = 1
@@ -3050,7 +3050,7 @@ configure:22178: $? = 0
 configure:22190: result: yes
 configure:22200: checking for _getch
 configure:22200: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccHRyzQ6.o: In function `main':
+/tmp/ccSuT53S.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:127: undefined reference to `_getch'
 collect2: error: ld returned 1 exit status
 configure:22200: $? = 1
@@ -3330,7 +3330,7 @@ configure:22298: $? = 0
 configure:22298: result: yes
 configure:22298: checking for getpassphrase
 configure:22298: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccxwDJWq.o: In function `main':
+/tmp/ccUuYiq5.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:131: undefined reference to `getpassphrase'
 collect2: error: ld returned 1 exit status
 configure:22298: $? = 1
@@ -11206,7 +11206,7 @@ configure:24304: $? = 0
 configure:24314: result: 16
 configure:24354: checking for strnicmp
 configure:24354: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccksgfWX.o: In function `main':
+/tmp/ccRiJxgz.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:194: undefined reference to `strnicmp'
 collect2: error: ld returned 1 exit status
 configure:24354: $? = 1
@@ -11418,7 +11418,7 @@ configure:24367: $? = 0
 configure:24367: result: yes
 configure:24380: checking for stricmp
 configure:24380: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccOr1XV5.o: In function `main':
+/tmp/cc12vwSE.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:195: undefined reference to `stricmp'
 collect2: error: ld returned 1 exit status
 configure:24380: $? = 1
@@ -11656,7 +11656,7 @@ configure:24444: $? = 0
 configure:24444: result: yes
 configure:24588: checking for dlopen
 configure:24588: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread >&5
-/tmp/ccgOBgir.o: In function `main':
+/tmp/ccz15AKY.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:201: undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:24588: $? = 1
@@ -12329,7 +12329,7 @@ configure:25027: $? = 0
 configure:25027: result: yes
 configure:25027: checking for create_sem
 configure:25027: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/ccmPiG0e.o: In function `main':
+/tmp/ccgNjCCG.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:212: undefined reference to `create_sem'
 collect2: error: ld returned 1 exit status
 configure:25027: $? = 1
@@ -17008,7 +17008,7 @@ configure:26450: checking for sys/uuid.h
 configure:26450: result: no
 configure:26464: checking for library containing uuid_create
 configure:26495: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/cczMtZSX.o: In function `main':
+/tmp/ccBYL8t8.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:205: undefined reference to `uuid_create'
 collect2: error: ld returned 1 exit status
 configure:26495: $? = 1
@@ -17437,7 +17437,7 @@ configure: failed program was:
 configure:26512: result: no
 configure:26520: checking for library containing uuid_generate
 configure:26551: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/ccr5agr5.o: In function `main':
+/tmp/cchEUpxc.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:205: undefined reference to `uuid_generate'
 collect2: error: ld returned 1 exit status
 configure:26551: $? = 1
@@ -17866,7 +17866,7 @@ configure: failed program was:
 configure:26568: result: no
 configure:26584: checking for uuid_create
 configure:26584: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/cc53pSJ9.o: In function `main':
+/tmp/ccxeE7Vh.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:228: undefined reference to `uuid_create'
 collect2: error: ld returned 1 exit status
 configure:26584: $? = 1
@@ -18105,7 +18105,7 @@ configure: failed program was:
 configure:26584: result: no
 configure:26584: checking for uuid_generate
 configure:26584: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/ccntgWXc.o: In function `main':
+/tmp/ccTAgKSk.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:228: undefined reference to `uuid_generate'
 collect2: error: ld returned 1 exit status
 configure:26584: $? = 1
@@ -19666,7 +19666,7 @@ configure:27677: $? = 0
 configure:27684: result: yes
 configure:27701: checking for set_h_errno
 configure:27701: gcc -o conftest -g -O2 -pthread -DLINUX -D_REENTRANT -D_GNU_SOURCE  conftest.c -lrt -lcrypt  -lpthread -ldl >&5
-/tmp/ccUJVPBL.o: In function `main':
+/tmp/ccNkLbqQ.o: In function `main':
 /home/derek/code/cweb/3rdparty/apr/conftest.c:235: undefined reference to `set_h_errno'
 collect2: error: ld returned 1 exit status
 configure:27701: $? = 1

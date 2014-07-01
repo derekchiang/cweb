@@ -30,11 +30,13 @@ install: lib
 
 3rdparty:
 	# apr
-	cd 3rdparty/apr && ./configure && make && sudo make install
+	cd 3rdparty/apr && ./configure && make && sudo make install && make clean
 	# r3
-	cd 3rdparty/r3 && ./autogen.sh && ./configure && make && sudo make install
+	cd 3rdparty/r3 && ./autogen.sh && ./configure && make && sudo make install && make clean
 	# libmicrohttpd
-	cd 3rdparty/libmicrohttpd && ./configure && make && sudo make install
+	cd 3rdparty/libmicrohttpd && ./configure && make && sudo make install && make clean
+	# jansson
+	cd 3rdparty/jansson && ./configure && make && sudo make install && make clean
 	
 clean:
 	rm -rf build
