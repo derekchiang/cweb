@@ -53,6 +53,7 @@ cweb_server_t *cweb_server_run(cweb_server_config_t config) {
     cweb_server_t *self = apr_palloc(pool, sizeof(cweb_server_t));
     self->config = config;
     self->pool = pool;
+    // TODO: make the following parameters configurable
     self->daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY,
                                     self->config.port,
                                     NULL, NULL, &root_handler, self,
