@@ -1,28 +1,27 @@
 CC = clang
 VERSION = 1.0.0
 
+SOURCES := $(realpath $(wildcard src/*.c))
+OBJECTS := $(patsubst src/%.c,build/%.o,$(wildcard src/*.c))
+SHARED_LIBS := apr-1 r3 libmicrohttpd jansson
+
 default: lib
 
-lib:
+lib: $(SOURCES)
 	mkdir -p build
 	cd build && \
-	    $(CC) -fblocks -c -fPIC \
-	    ../src/cweb_common.c ../src/cweb_router.c ../src/cweb_server.c\
+	    $(CC) -fblocks -c -fPIC $(SOURCES) \
 	    -I../include \
 	    -I../3rdparty/apr/include \
 	    -I../3rdparty/r3/include \
 	    -I../3rdparty/libmicrohttpd/src/include
-	$(CC) -shared -Wl,-soname,libcweb.so -o build/libcweb.so \
-	    build/cweb_common.o build/cweb_router.o build/cweb_server.o
+	$(CC) -shared -Wl,-soname,libcweb.so -o build/libcweb.so $(OBJECTS)
 
 examples: lib
 	mkdir -p build
 	$(foreach program,server,\
 	$(CC) -std=c11 -fblocks examples/$(program).c -o build/$(program) -I./include -L./build -lcweb \
-	    `pkg-config --cflags --libs apr-1` \
-	    `pkg-config --cflags --libs r3` \
-	    `pkg-config --cflags --libs libmicrohttpd` \
-	    `pkg-config --cflags --libs jansson` \
+	    $(foreach lib,$(SHARED_LIBS),`pkg-config --cflags --libs $(lib)`) \
 	    -lBlocksRuntime &&) echo "finished building examples"
 
 install: lib
