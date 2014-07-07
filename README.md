@@ -11,9 +11,9 @@ This is very much a work in progress.  [Here is a sneak peak](examples/server.c)
 3. [libmicrohttpd](http://www.gnu.org/software/libmicrohttpd/)
 4. [clang](http://clang.llvm.org/) with [blocks extension](http://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29)
 
-On Ubuntu, clang and the blocks extension can be installed with:
+On Ubuntu, all dependencies other than r3 can be installed with the following command:
 
-    sudo apt-get install clang libblocksruntime-dev
+    sudo apt-get install libapr1-dev libmicrohttpd-dev clang libblocksruntime-dev
 
 ## Build / Install
 
