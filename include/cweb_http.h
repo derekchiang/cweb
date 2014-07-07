@@ -12,7 +12,7 @@ typedef struct cweb_request {
     size_t *upload_data_size;
 
     // private; do not touch
-    const char **params;
+    char **params;
     struct MHD_Connection *_connection;
 } cweb_request_t;
 
