@@ -15,21 +15,14 @@ On Ubuntu, clang and the blocks extension can be installed with:
 
     sudo apt-get install clang libblocksruntime-dev
 
-The other dependencies come with this repo and therefore do not need to be installed manually.  See the build instructions below. 
-
 ## Build
 
 On Ubuntu:
 
-    make 3rdparty # optional... only if you don't have the dependencies installed already
     make
     sudo make install
 
-To build the examples:
-
-    make examples
-
-The examples will be put under `build/`.
+The examples will be put under `build/bin/`.
 
 ## Benchmark
 
