@@ -15,14 +15,17 @@ On Ubuntu, clang and the blocks extension can be installed with:
 
     sudo apt-get install clang libblocksruntime-dev
 
-## Build
+## Build / Install
 
-On Ubuntu:
+To build:
 
     make
-    sudo make install
 
 The examples will be put under `build/bin/`.
+
+To install:
+
+    sudo make install
 
 ## Benchmark
 
