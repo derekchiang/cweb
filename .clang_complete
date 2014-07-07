@@ -1,0 +1,8 @@
+-I/usr/local/apr/include/apr-1
+-I/usr/local/include/r3
+-I/usr/local/include
+-I/home/derek/code/cweb/include
+-I/home/derek/code/cweb/src
+-Dcweb_EXPORTS
+-Wl,-soname,libcweb.so
+-Wl,-rpath,/usr/local/apr/lib:/usr/local/lib:
