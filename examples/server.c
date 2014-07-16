@@ -31,7 +31,7 @@ int main(void) {
                 tag.type = MUSTACHE_TYPE_DECORATOR;
                 tag.as_decorator = Block_copy(^(const char *text, mustache_render_b render) {
                     char *buf = malloc(1024);
-                    sprintf(buf, "~~~~~~~~\n%s\n~~~~~~~~", render(text));
+                    sprintf(buf, "~~~~~~~~~~~~~~~~~~~~\n%s\n~~~~~~~~~~~~~~~~~~~~", render(text));
                     return buf;
                 });
             } else if (!strcmp(tag_name, "name")) {
