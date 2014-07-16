@@ -30,4 +30,5 @@ session.vim
 .tags
 
 build/
+*.pyc
 

@@ -8,6 +8,8 @@ SET(CMAKE_MODULE_PATH
 SET(BLOCKS_CC_FLAGS "-fblocks")
 SET(BLOCKS_LINKER_FLAGS "-lBlocksRuntime")
 
+set(CMAKE_BUILD_TYPE Debug)
+
 add_definitions(${BLOCKS_CC_FLAGS})
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${BLOCKS_LINKER_FLAGS}")
 add_definitions(${BLOCKS_LINKER_FLAGS})
@@ -26,3 +28,5 @@ install(FILES ${HEADERS} DESTINATION include)
 
 add_subdirectory(src)
 add_subdirectory(examples)
+add_subdirectory(deps/custache)
+

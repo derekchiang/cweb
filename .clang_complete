@@ -5,4 +5,4 @@
 -I/home/derek/code/cweb/src
 -Dcweb_EXPORTS
 -Wl,-soname,libcweb.so
--Wl,-rpath,/usr/local/apr/lib:/usr/local/lib:
+-Wl,-rpath,/usr/local/apr/lib:/home/derek/code/cweb/build/deps/custache/src:/usr/local/lib:
