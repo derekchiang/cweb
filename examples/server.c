@@ -26,13 +26,17 @@ int main(void) {
     cweb_router_add_route(router, "/{name}", ^(cweb_request_t *req, cweb_response_t *res) {
         const char *err = NULL;
         char *body = custache_render(cus, ^(const char *tag_name) {
-            mustache_tag_t tag;
+            mustache_tag_t tag = {0};
             if (!strcmp(tag_name, "decorate")) {
                 tag.type = MUSTACHE_TYPE_DECORATOR;
+                __block char *buf;
                 tag.as_decorator = Block_copy(^(const char *text, mustache_render_b render) {
-                    char *buf = malloc(1024);
+                    buf = malloc(1024);
                     sprintf(buf, "~~~~~~~~~~~~~~~~~~~~\n%s\n~~~~~~~~~~~~~~~~~~~~", render(text));
                     return buf;
+                });
+                tag.cleanup = Block_copy(^(mustache_tag_t _){
+                    free(buf);
                 });
             } else if (!strcmp(tag_name, "name")) {
                 tag.type = MUSTACHE_TYPE_STRING;
